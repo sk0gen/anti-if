@@ -11,33 +11,36 @@ class GildedRose
         if item.quality > 0
             decrease_quality(item)
         end
+        item.sell_in = item.sell_in - 1
       elsif aged_brie?(item)
         if quality_less_than_50?(item)
           increase_quality(item)
         end
+        item.sell_in = item.sell_in - 1
+
       elsif backstage_pass?(item)
         handle_backstage_pass(item)
       end
-      if ! sulfuras?(item)
-        item.sell_in = item.sell_in - 1
-      end
-      if item.sell_in < 0
-        if ! aged_brie?(item)
-          if ! backstage_pass?(item)
-            if item.quality > 0
-              if ! sulfuras?(item)
-                decrease_quality(item)
-              end
-            end
-          else
-            item.quality = item.quality - item.quality
-          end
-        else
+
+      if aged_brie?(item)
+        if item.sell_in < 0
           if quality_less_than_50?(item)
             increase_quality(item)
           end
         end
+      elsif backstage_pass?(item)
+        if item.sell_in < 0
+          item.quality = item.quality - item.quality
+        end
+      elsif sulfuras?(item)
+      elsif generic?(item)
+        if item.sell_in < 0
+          if item.quality > 0
+            decrease_quality(item)
+          end
+        end
       end
+
     end
   end
 
@@ -57,6 +60,7 @@ class GildedRose
         end
       end
     end
+    item.sell_in = item.sell_in - 1
   end
 
   def quality_less_than_50?(item)
