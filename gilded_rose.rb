@@ -1,3 +1,7 @@
+module Inventory
+
+end
+
 class GildedRose
 
   class Generic
@@ -66,7 +70,7 @@ class GildedRose
     end
 
   end
-  
+
   class Sulfuras
     attr_reader :quality, :sell_in
     def initialize(quality, sell_in)
@@ -124,9 +128,6 @@ class GildedRose
     end
   end
 end
-
-
-
 
 class Item
   attr_accessor :name, :sell_in, :quality
