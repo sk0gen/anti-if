@@ -1,7 +1,11 @@
 require File.join(File.dirname(__FILE__), '../gilded_rose')
 require 'minitest/autorun'
 
+require 'mutant/minitest/coverage'
+
 class GildedRoseTest < Minitest::Test
+
+  cover "Inventory"
 
   def assert_backstage_pass_quality(expected, sell_in, quality)
     items = [Item.new("Backstage passes to a TAFKAL80ETC concert", sell_in, quality)]

@@ -128,10 +128,10 @@ class GildedRose
   def update_quality
     @items.each do |item|
       next if sulfuras?(item)
+      item.sell_in -= 1
       good = GoodCategory.new.build_for(item)
       good.update
       item.quality = good.quality
-      item.sell_in = good.sell_in
     end
   end
 
